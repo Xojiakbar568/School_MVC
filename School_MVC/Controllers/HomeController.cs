@@ -9,6 +9,10 @@ namespace School_MVC.Controllers
     public class HomeController : Controller
     {
         private readonly ISchoolInterface _inter;
+        public HomeController(ISchoolInterface inter)
+        {
+        _inter = inter;
+        }
         
         private static List<School> _schools = new List<School>
         {
@@ -23,7 +27,7 @@ namespace School_MVC.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            return View(_inter.GetAll());
         }
         [HttpGet]
         public IActionResult Add()
